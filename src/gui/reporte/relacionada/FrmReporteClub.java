@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,6 +18,13 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import entidad.Club;
+import model.ClubModel;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.swing.JRViewer;
+import util.GeneradorReporte;
+
 public class FrmReporteClub extends JFrame implements ActionListener   {
 
 	private static final long serialVersionUID = 1L;
@@ -23,6 +32,7 @@ public class FrmReporteClub extends JFrame implements ActionListener   {
 	private JTextField txtInicio;
 	private JTextField txtFin;
 	private JButton btnFiltrar;
+	private JPanel panelReporte;
 
 	/**
 	 * Launch the application.
@@ -59,7 +69,7 @@ public class FrmReporteClub extends JFrame implements ActionListener   {
 		lblTitulo.setBounds(10, 26, 1161, 36);
 		contentPane.add(lblTitulo);
 		
-		JPanel panelReporte = new JPanel();
+		panelReporte = new JPanel();
 		panelReporte.setBorder(new TitledBorder(null, "Reportes", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		panelReporte.setBounds(31, 176, 1144, 475);
 		contentPane.add(panelReporte);
@@ -96,6 +106,27 @@ public class FrmReporteClub extends JFrame implements ActionListener   {
 		}
 	}
 	protected void actionPerformedBtnFiltrarJButton(ActionEvent e) {
+		
+		String fecIni  = txtInicio.getText().trim();
+		String fecFin  = txtFin.getText().trim();
+		
+		Date dtIni = Date.valueOf(fecIni);
+		Date dtFin = Date.valueOf(fecFin);
+	
+		ClubModel model = new ClubModel();
+		List<Club> lstClub = model.listaPorFecha(dtIni, dtFin);
+		
+		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(lstClub);
+		String jasper = "reporteDocente.jasper";	
+		
+		JasperPrint print = GeneradorReporte.genera(jasper, dataSource, null);
+		
+		JRViewer jRViewer = new JRViewer(print);
+		
+		panelReporte.removeAll();
+		panelReporte.add(jRViewer);
+		panelReporte.repaint();
+		panelReporte.revalidate();
 	}
 }
 
