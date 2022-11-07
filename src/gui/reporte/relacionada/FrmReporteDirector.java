@@ -56,7 +56,7 @@ public class FrmReporteDirector extends JFrame implements ItemListener, ActionLi
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		lblTitulo = new JLabel("Reporte de club");
+		lblTitulo = new JLabel("Reporte de Director");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblTitulo.setBounds(10, 31, 1055, 36);
