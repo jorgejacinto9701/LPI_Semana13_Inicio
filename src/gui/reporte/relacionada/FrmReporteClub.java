@@ -5,8 +5,6 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,13 +15,6 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-
-import entidad.Club;
-import model.ClubModel;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.swing.JRViewer;
-import util.GeneradorReporte;
 
 public class FrmReporteClub extends JFrame implements ActionListener   {
 
@@ -107,26 +98,7 @@ public class FrmReporteClub extends JFrame implements ActionListener   {
 	}
 	protected void actionPerformedBtnFiltrarJButton(ActionEvent e) {
 		
-		String fecIni  = txtInicio.getText().trim();
-		String fecFin  = txtFin.getText().trim();
-		
-		Date dtIni = Date.valueOf(fecIni);
-		Date dtFin = Date.valueOf(fecFin);
 	
-		ClubModel model = new ClubModel();
-		List<Club> lstClub = model.listaPorFecha(dtIni, dtFin);
-		
-		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(lstClub);
-		String jasper = "reporteDocente.jasper";	
-		
-		JasperPrint print = GeneradorReporte.genera(jasper, dataSource, null);
-		
-		JRViewer jRViewer = new JRViewer(print);
-		
-		panelReporte.removeAll();
-		panelReporte.add(jRViewer);
-		panelReporte.repaint();
-		panelReporte.revalidate();
 	}
 }
 
