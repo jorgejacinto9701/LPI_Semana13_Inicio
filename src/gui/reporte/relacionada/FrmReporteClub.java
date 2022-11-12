@@ -5,16 +5,28 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+
+import entidad.Club;
+import model.ClubModel;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.swing.JRViewer;
+import util.FechaUtil;
+import util.GeneradorReporte;
+import util.Validaciones;
 
 public class FrmReporteClub extends JFrame implements ActionListener   {
 
@@ -97,10 +109,48 @@ public class FrmReporteClub extends JFrame implements ActionListener   {
 		}
 	}
 	protected void actionPerformedBtnFiltrarJButton(ActionEvent e) {
+		String fecIni  = txtInicio.getText().trim();
+		String fecFin  = txtFin.getText().trim();
 		
+		if (!fecIni.matches(Validaciones.FECHA)) {
+			mensaje("La fecha Inicio tiene formato yyyy-MM-dd");
+		}else if (!fecFin.matches(Validaciones.FECHA)) {
+			mensaje("La fecha Fin tiene formato yyyy-MM-dd");
+		}else if (FechaUtil.isNotSuperiorFechaYYYYMMdd(fecIni, fecFin)) {
+			mensaje("La Fecha fin es superior a la Fecha inicio");
+		}else {
+			Date dtIni = Date.valueOf(fecIni);
+			Date dtFin = Date.valueOf(fecFin);
+			
+			ClubModel model = new ClubModel();
+			List<Club> lista = model.listaPorRangoFechas(dtIni, dtFin);
+			
+			//Datos del reporte
+			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(lista);
+			
+			//Diseño del reporte
+			String jasper = "reporteClub.jasper";	
+			
+			//Se obtiene el reporte
+			JasperPrint print = GeneradorReporte.genera(jasper, dataSource, null);
+			
+			JRViewer jRViewer = new JRViewer(print);
+			
+			panelReporte.removeAll();
+			panelReporte.add(jRViewer);
+			panelReporte.repaint();
+			panelReporte.revalidate();
+			
+		}	
 	
 	}
+	
+	public void mensaje(String ms){
+		JOptionPane.showMessageDialog(this, ms);
+	}
 }
+
+
 
 
 

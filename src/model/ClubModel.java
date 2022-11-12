@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -213,5 +214,52 @@ public class ClubModel {
 		return salida;
 	}
 
-
+	public List<Club> listaPorRangoFechas(Date fecIni, Date fecFin){
+		ArrayList<Club> salida = new ArrayList<Club>();
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		try {
+			//1 Se crea la conexion
+			conn = MySqlDBConexion.getConexion();
+			
+			//2 Se prepara el SQL
+			String sql = "SELECT c.*, p.nombre FROM club c inner join pais p on c.idPais = p.idPais where c.fechaCreacion between ? and ? "; 
+			psmt = conn.prepareStatement(sql);
+			psmt.setDate(1, fecIni);
+			psmt.setDate(2, fecFin);
+			
+			log.info(">>> " + psmt);
+			
+			//3 Se ejecuta el SQL en la base de datos
+			rs = psmt.executeQuery();
+			Club objClub = null;
+			Pais objPais = null;
+			while(rs.next()) {
+				objClub = new Club();
+				objClub.setIdClub(rs.getInt(1));
+				objClub.setNombre(rs.getString(2));
+				objClub.setFechaCreacion(rs.getDate(3));
+				objClub.setFechaRegistro(rs.getTimestamp(4));
+				objClub.setEstado(rs.getInt(5));
+				
+				objPais = new Pais();
+				objPais.setIdPais(rs.getInt(6));
+				objPais.setNombre(rs.getString(7));
+				objClub.setPais(objPais);
+				salida.add(objClub);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (psmt != null) psmt.close();
+				if (conn != null) conn.close();
+			} catch (Exception e2) {}
+		}
+		return salida;
+	}
 }
