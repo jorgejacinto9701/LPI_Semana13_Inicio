@@ -142,6 +142,52 @@ public class DirectorModel {
 		return salida;
 	}
 	
+	public List<Director> listaPorNombre(String filtro){
+		ArrayList<Director> salida = new ArrayList<Director>();
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		try {
+			//1 Se crea la conexion
+			conn = MySqlDBConexion.getConexion();
+			
+			//2 Se prepara el SQL
+			String sql = "SELECT c.*, p.nombre FROM Director c inner join Grado p on c.idGrado = p.idGrado where c.nombre like ?";
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, filtro);
+			
+			log.info(">>> " + psmt);
+			
+			//3 Se ejecuta el SQL en la base de datos
+			rs = psmt.executeQuery();
+			Director objDirector = null;
+			Grado objGrado = null;
+			while(rs.next()) {
+				objDirector = new Director();
+				objDirector.setIdDirector(rs.getInt(1));
+				objDirector.setNombre(rs.getString(2));
+				objDirector.setFechaNacimiento(rs.getDate(3));
+				objDirector.setFechaRegistro(rs.getTimestamp(4));
+				objDirector.setEstado(rs.getInt(5));
+				
+				objGrado = new Grado();
+				objGrado.setIdGrado(rs.getInt(6));
+				objGrado.setNombre(rs.getString(7));
+				objDirector.setGrado(objGrado);
+				salida.add(objDirector);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (psmt != null) psmt.close();
+				if (conn != null) conn.close();
+			} catch (Exception e2) {}
+		}
+		return salida;
+	}
 }
 
 

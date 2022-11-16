@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,6 +18,13 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+
+import entidad.Director;
+import model.DirectorModel;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.swing.JRViewer;
+import util.GeneradorReporte;
 
 public class FrmReporteDirector extends JFrame implements ItemListener, ActionListener {
 
@@ -93,6 +101,27 @@ public class FrmReporteDirector extends JFrame implements ItemListener, ActionLi
 		}
 	}
 	protected void actionPerformedBtnFiltrarJButton(ActionEvent e) {
+		String filtro = txtFiltro.getText().trim();
+		
+		DirectorModel model = new DirectorModel();
+		List<Director> lista = model.listaPorNombre(filtro +"%");
+		
+		//Datos del reporte
+		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(lista);
+		
+		//Diseño del reporte
+		String jasper = "Cherry.jasper";	
+		
+		//Se obtiene el reporte
+		JasperPrint print = GeneradorReporte.genera(jasper, dataSource, null);
+		
+		JRViewer jRViewer = new JRViewer(print);
+		
+		panelReporte.removeAll();
+		panelReporte.add(jRViewer);
+		panelReporte.repaint();
+		panelReporte.revalidate();
+			
 	}
 }
 
