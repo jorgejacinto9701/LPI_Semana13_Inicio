@@ -110,7 +110,7 @@ public class FrmReporteDirector extends JFrame implements ItemListener, ActionLi
 		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(lista);
 		
 		//Diseño del reporte
-		String jasper = "Cherry.jasper";	
+		String jasper = "reporteDirector.jasper";	
 		
 		//Se obtiene el reporte
 		JasperPrint print = GeneradorReporte.genera(jasper, dataSource, null);

@@ -13,23 +13,23 @@ public class Director {
 	private int estado;
 	private Grado grado;
 	
-	//Inicio get para el reporte
-	SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-	SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	//INICIO atributos para el reporte
+	SimpleDateFormat sdfFec = new SimpleDateFormat("yyyy-MM-dd");
+	SimpleDateFormat sdfTim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
+	public String getFormatoNacimiento() {
+		return sdfFec.format(fechaNacimiento);
+	}
+	public String getFormatoRegistro() {
+		return sdfTim.format(fechaRegistro);
+	}
 	public String getFormatoEstado() {
-		return estado == 1 ? "Activo" : "Inactivo";
+		return estado == 1 ? "Activo":"Inactivo";
 	}
 	public String getFormatoGrado() {
 		return grado.getNombre();
 	}
-	public String getFormatoFecNacimiento() {
-		return sdf1.format(fechaNacimiento);
-	}
-	public String getFormatoFecRegistro() {
-		return sdf2.format(fechaRegistro);
-	}
-	//Fin
+	//FIN atributos para el reporte
 	
 	public int getIdDirector() {
 		return idDirector;
