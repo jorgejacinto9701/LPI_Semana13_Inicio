@@ -17,10 +17,10 @@ public class Director {
 	SimpleDateFormat sdfFec = new SimpleDateFormat("yyyy-MM-dd");
 	SimpleDateFormat sdfTim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
-	public String getFormatoNacimiento() {
+	public String getFormatoFecNacimiento() {
 		return sdfFec.format(fechaNacimiento);
 	}
-	public String getFormatoRegistro() {
+	public String getFormatoFecRegistro() {
 		return sdfTim.format(fechaRegistro);
 	}
 	public String getFormatoEstado() {

@@ -23,7 +23,7 @@ public class Club {
 	public String getFormatoPais() {
 		return pais.getNombre();
 	}
-	public String getFormatoFecCreacion() {
+	public String getFormatoFecha() {
 		return sdf1.format(fechaCreacion);
 	}
 	public String getFormatoFecRegistro() {

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteDirector" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="13acf49e-4913-4d1b-bccc-113817ad15d1">
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="idDirector" class="java.lang.Integer"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="formatoEstado" class="java.lang.String"/>
+	<field name="formatoGrado" class="java.lang.String"/>
+	<field name="formatoFecNacimiento" class="java.lang.String"/>
+	<field name="formatoFecRegistro" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="95" backcolor="#000000" uuid="6c6ca4e1-17cd-4913-93d6-5e670ea9ae8a"/>
+				<staticText>
+					<reportElement style="Title" x="0" y="0" width="370" height="66" uuid="a2a2cac8-5a7d-4487-8c54-dab235ce4e21"/>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Directores]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" x="157" y="66" width="396" height="29" uuid="8978eac3-c578-41c9-837e-48d2b0184642"/>
+					<textElement textAlignment="Right">
+						<font size="22" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Autor : Jorge Jacinto Gutarra]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="100" width="555" height="32" forecolor="#000000" backcolor="#CC0000" uuid="e3c14156-5b51-4201-918b-97fdc012e5d4"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="307" y="12" width="144" height="20" forecolor="#FFFFFF" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="70" height="26" forecolor="#FCFCFC" backcolor="#080808" uuid="9f6ddea6-5b9d-42b3-8bca-495b5c95f1f9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="30b09fd2-929b-4cb7-8d03-677ab1250807"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CÓDIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="70" y="0" width="130" height="26" forecolor="#FCFCFC" backcolor="#080808" uuid="f9c05334-b9ef-4bcc-af6a-41454568e354">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="50ac3844-fa12-4458-808f-b3299cf277da"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="200" y="0" width="80" height="26" forecolor="#FCFCFC" backcolor="#080808" uuid="ae03d0a5-1039-4e5d-b91d-3b1be3a92ae2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="87172af5-da8f-4536-bf6e-f265b9a1d9e8"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="280" y="0" width="110" height="26" forecolor="#FCFCFC" backcolor="#080808" uuid="e77f3517-0ac9-4ad8-8f73-250f3160c74e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="56d0cd1c-e3cd-42a8-a256-d591cf93bbcb"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[F.NACIMIENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="390" y="0" width="90" height="26" forecolor="#FCFCFC" backcolor="#080808" uuid="73ddfb9b-9c50-4659-a4e9-4b957dc7a6b2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ef2852e7-e6bb-4a94-84d4-6962b96a71b0"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[F.REGISTRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="480" y="0" width="75" height="26" forecolor="#FCFCFC" backcolor="#080808" uuid="7a766f8c-d9b9-4811-bbc6-4d33c8210ed9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a71631c7-fe64-4b0f-b2eb-fb223aec8c1d"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[GRADO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="70" height="20" uuid="4d17abed-549b-42e4-8fef-6b4365eedbb1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="30b09fd2-929b-4cb7-8d03-677ab1250807"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{idDirector}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="0" width="130" height="20" uuid="8483812c-78d3-4453-818f-7a10af19ea3b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="50ac3844-fa12-4458-808f-b3299cf277da"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="80" height="20" uuid="97116150-f2c4-469c-9b5e-587253387f71">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="87172af5-da8f-4536-bf6e-f265b9a1d9e8"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{formatoEstado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="110" height="20" uuid="87400a10-93e2-42af-92d9-7011671d1b6d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="56d0cd1c-e3cd-42a8-a256-d591cf93bbcb"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{formatoFecNacimiento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="0" width="90" height="20" uuid="5099bd69-7037-4071-a1c8-95570bc61129">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ef2852e7-e6bb-4a94-84d4-6962b96a71b0"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{formatoFecRegistro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="0" width="75" height="20" uuid="b0cb004c-fefb-4574-b29d-b6656d225dca">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a71631c7-fe64-4b0f-b2eb-fb223aec8c1d"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{formatoGrado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="1133a906-5b71-476e-9f3e-bc97c97058c1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="729c3539-f946-4d0e-a0a7-bda2815ea1b0"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="513" y="0" width="40" height="20" forecolor="#FFFFFF" uuid="4834e99c-7f6c-485a-b098-50e5187f2ab4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="433" y="0" width="80" height="20" forecolor="#FFFFFF" uuid="9825b46e-76f1-469a-abb8-a1cc27aad685"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="1" width="197" height="20" forecolor="#FFFFFF" uuid="137d38c7-1a83-4fc5-b156-9d5f1b1a0ddc"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
