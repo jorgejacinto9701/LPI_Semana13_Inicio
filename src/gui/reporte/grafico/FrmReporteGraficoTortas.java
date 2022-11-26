@@ -6,7 +6,9 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -37,6 +39,8 @@ public class FrmReporteGraficoTortas extends JFrame implements ActionListener   
 	private JButton btnFiltrar;
 	private JPanel panelReporte;
 
+	private static Logger log = Logger.getLogger(FrmReporteGraficoTortas.class.getName());
+	
 	/**
 	 * Launch the application.
 	 */
@@ -129,10 +133,18 @@ public class FrmReporteGraficoTortas extends JFrame implements ActionListener   
 			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(lista);
 			
 			//Diseño del reporte
-			String jasper = "reporteXXX.jasper";	
+			String jasper = "reporteTortas.jasper";	
+			
+			//Obtengo la ruta relativa de la imagen
+			String rutaImagen = FrmReporteGraficoTortas.class.getResource("/logos/Mercedes_Logo_.jpg").getPath();
+			log.info(" rutaImagen >>" + rutaImagen);
+			
+			//Envio la ruta relativa como parámetro
+			HashMap<String, Object> parametros = new HashMap<String, Object>();
+			parametros.put("RUTA_IMAGEN",rutaImagen);
 			
 			//Se obtiene el reporte
-			JasperPrint print = GeneradorReporte.genera(jasper, dataSource, null);
+			JasperPrint print = GeneradorReporte.genera(jasper, dataSource, parametros);
 			
 			JRViewer jRViewer = new JRViewer(print);
 			

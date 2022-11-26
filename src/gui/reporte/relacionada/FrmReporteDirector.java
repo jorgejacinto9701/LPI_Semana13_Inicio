@@ -7,7 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -28,6 +30,8 @@ import util.GeneradorReporte;
 
 public class FrmReporteDirector extends JFrame implements ItemListener, ActionListener {
 
+	private static Logger log = Logger.getLogger(FrmReporteDirector.class.getName());
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel lblTitulo;
@@ -112,8 +116,16 @@ public class FrmReporteDirector extends JFrame implements ItemListener, ActionLi
 		//Diseño del reporte
 		String jasper = "reporteDirector.jasper";	
 		
+		//Obtengo la ruta relativa de la imagen
+		String rutaImagen = FrmReporteDirector.class.getResource("/logos/Mercedes_Logo_.jpg").getPath();
+		log.info(" rutaImagen >>" + rutaImagen);
+		
+		//Envio la ruta relativa como parámetro
+		HashMap<String, Object> parametros = new HashMap<String, Object>();
+		parametros.put("RUTA_IMAGEN",rutaImagen);
+
 		//Se obtiene el reporte
-		JasperPrint print = GeneradorReporte.genera(jasper, dataSource, null);
+		JasperPrint print = GeneradorReporte.genera(jasper, dataSource, parametros);
 		
 		JRViewer jRViewer = new JRViewer(print);
 		
@@ -124,6 +136,11 @@ public class FrmReporteDirector extends JFrame implements ItemListener, ActionLi
 			
 	}
 }
+
+
+
+
+
 
 
 

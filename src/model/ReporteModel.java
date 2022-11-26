@@ -39,7 +39,7 @@ public class ReporteModel {
 			while(rs.next()) {
 				obj = new ReporteEntidad();
 				obj.setCategoria(rs.getString(1));
-				obj.setCantidad(rs.getInt(0));
+				obj.setCantidad(rs.getInt(2));
 				salida.add(obj);
 			}
 		} catch (Exception e) {
